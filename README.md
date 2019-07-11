@@ -39,4 +39,5 @@ sudo firewall-cmd --zone=FedoraServer --permanent --add-port=56358/tcp
 # 3. NGINX Web Server
 After hours of deciding between NGINX & Apache, I decided on NGINX because of how powerfully fast it is when using static configurations. For now my plan is to host my portfolio on this server so NGINX should suit be fine for my use case, but if you are using a dynamic configuration with mutiple web pages Apache may be better for you.
 
-# 4. Next Cloud 
+<a name="owncloud"></a>
+# 4. Own Cloud Personal Cloud Server 
