@@ -4,8 +4,9 @@ My plan for this server is to use it as a web server and a cloud file server.
 I will be using **Fedora 30 Server** edition on a scrapped computer I build and deploying it in my household. 
 
 # Table of Contents
-1. [ Writing the ISO & Installing onto the machine. ](#desc)
-2. [ Securing SSH. ](#SSH)
+1. [ Writing the ISO & Installing onto the machine ](#desc)
+2. [ Securing SSH ](#SSH)
+3. [ NGINX ](#NGINX)
 
 <a name="desc"></a>
 # 1. Writing the ISO & Installing onto the machine
@@ -34,3 +35,5 @@ sudo firewall-cmd --get-active-zones
 #Add rule to that zone and port 56358
 sudo firewall-cmd --zone=FedoraServer --permanent --add-port=56358/tcp
 ```
+<a name="NGINX"></a>
+# NGINX
