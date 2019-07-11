@@ -15,3 +15,16 @@ I will be using a less known port (ex. **56358**) to secure the SSH service. To 
 sudo nano /etc/ssh/ssh_config
 ```
 ![alt text](https://github.com/collinkleest/HomeServer/blob/master/images/Capture.JPG)
+Now we must check if we have a firewall running. Fedora comes with firewalld by default so we will run some bash to make sure it's running and then set a rule to allow traffic to hit our SSH service.
+```bash
+sudo systemctl start firewalld
+sudo systemctl status firewalld
+#This should output as running
+```
+Now I will add a rule to allow traffic on 56358
+```bash
+#Check which zone is active on network interface
+sudo firewall-cmd --get-active-zones
+#Add rule to that zone and port 56358
+sudo firewall-cmd --zone=FedoraServer --permanent --add-port=56358/tcp
+```
