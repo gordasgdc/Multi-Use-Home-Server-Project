@@ -14,3 +14,4 @@ I will be using a less known port (ex. **56358**) to secure the SSH service. To 
 ```bash
 sudo nano /etc/ssh/ssh_config
 ```
+![alt text](https://github.com/collinkleest/HomeServer/blob/master/images/Capture.JPG)
