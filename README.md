@@ -6,8 +6,8 @@ I will be using **Fedora 30 Server** edition on a scrapped computer I build and 
 # Table of Contents
 1. [ Writing the ISO & Installing onto the machine ](#desc)
 2. [ Securing SSH ](#SSH)
-3. [ NGINX ](#NGINX)
-
+3. [ NGINX Web Server](#NGINX)
+4. [ Own Cloud](#owncloud)
 <a name="desc"></a>
 # 1. Writing the ISO & Installing onto the machine
 I retreieved the ISO image from the official Fedora website *https://getfedora.org/en/server/download/* and used a installation tool called **Rufus**.
@@ -36,5 +36,7 @@ sudo firewall-cmd --get-active-zones
 sudo firewall-cmd --zone=FedoraServer --permanent --add-port=56358/tcp
 ```
 <a name="NGINX"></a>
-# NGINX
+# 3. NGINX Web Server
 After hours of deciding between NGINX & Apache, I decided on NGINX because of how powerfully fast it is when using static configurations. For now my plan is to host my portfolio on this server so NGINX should suit be fine for my use case, but if you are using a dynamic configuration with mutiple web pages Apache may be better for you.
+
+# 4. Next Cloud 
