@@ -4,20 +4,20 @@ My plan for this server is to use it as a web server and a cloud file server.
 I will be using **Fedora 30 Server** edition on a scrapped computer I build and deploying it in my household. 
 
 # Table of Contents
-1. [ Description. ](#desc)
-2. [ Usage tips. ](#usage)
+1. [ Writing the ISO & Installing onto the machine. ](#desc)
+2. [ Securing SSH. ](#SSH)
 
 <a name="desc"></a>
-# Writing the ISO & Installing onto the machine
-I retreieved the ISO image from the official Fedora website *https://getfedora.org/en/server/download/* and used a tool called **Rufus**.
-Rufus is an easy to use ISO image writer *https://rufus.ie/*. After writing the ISO to a 4GB flash drive, I inserted it into my machine and followed the installation GUI. 
+# 1. Writing the ISO & Installing onto the machine
+I retreieved the ISO image from the official Fedora website *https://getfedora.org/en/server/download/* and used a installation tool called **Rufus**.
+Rufus is an easy to use ISO image writer, found at *https://rufus.ie/*. After writing the ISO to a 4GB flash drive, I inserted it into my machine and followed the Fedora installation GUI. 
 
-<a name="usage"></a>
-# Post Installation
+<a name="SSH"></a>
+# 2. Securing SSH
 To access the server remotely and from other computers localy we will need a SSH (Secure Shell) client. 
 Fedora 30 Server eddition already comes with a SSH client instlled on the computer itself but this is on a known port, port 22. This leads me to my first security measure on this server.
 I will be using a less known port (ex. **56358**) to secure the SSH service. To do this you will need to navigate to the where the SSH config file is located and edit the configuration file with your favorite text editor. 
-```bash
+```bashPost Installation
 sudo nano /etc/ssh/ssh_config
 ```
 ![alt text](https://github.com/collinkleest/HomeServer/blob/master/images/Capture.JPG)
