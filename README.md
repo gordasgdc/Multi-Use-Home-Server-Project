@@ -35,6 +35,13 @@ sudo firewall-cmd --get-active-zones
 #Add rule to that zone and port 56358
 sudo firewall-cmd --zone=FedoraServer --permanent --add-port=56358/tcp
 ```
+##### Allowing SSH to be accessible from anywhere
+To allow SSH to be accessible from anywhere in the world we will need to port forward to our machine. You will need to log into your default gateway (router).
+```bash
+#issue this command to find the IP  of the default gateway
+ip route | grep 'default'
+```
+The IP returned will be the defualt gateway, and can be accessible from a browser. Simply type the default gateway into your browser and you will be redirected to the your routers page. NoIP has a great guide to portforward **https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/** 
 <a name="NGINX"></a>
 # 3. NGINX Web Server
 After hours of deciding between NGINX & Apache, I decided on NGINX because of how powerfully fast it is when using static configurations. For now my plan is to host my portfolio on this server so NGINX should suit be fine for my use case, but if you are using a dynamic configuration with mutiple web pages Apache may be better for you.
@@ -48,5 +55,8 @@ sudo systemctl start nginx
 systemctl status nginx 
 sudo systemctl enable nginx
 ```
+##### Test Your NGINX Server
+```bash
+
 <a name="owncloud"></a>
 # 4. Own Cloud Personal Cloud Server 
