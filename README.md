@@ -38,6 +38,15 @@ sudo firewall-cmd --zone=FedoraServer --permanent --add-port=56358/tcp
 <a name="NGINX"></a>
 # 3. NGINX Web Server
 After hours of deciding between NGINX & Apache, I decided on NGINX because of how powerfully fast it is when using static configurations. For now my plan is to host my portfolio on this server so NGINX should suit be fine for my use case, but if you are using a dynamic configuration with mutiple web pages Apache may be better for you.
-
+I will now go through my installation and configuration of NGINX. This will be different across distrobutions of linux, as I said before I am using Fedora so this installation will work for most RedHat distribtuions.  
+```bash
+#install nginx through dnf
+sudo dnf -y install nginx
+#start & enable nginx on startup
+sudo systemctl start nginx
+#clarify nginx is running 
+systemctl status nginx 
+sudo systemctl enable nginx
+```
 <a name="owncloud"></a>
 # 4. Own Cloud Personal Cloud Server 
