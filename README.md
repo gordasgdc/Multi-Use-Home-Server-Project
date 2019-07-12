@@ -8,6 +8,7 @@ I will be using **Fedora 30 Server** edition on a scrapped computer I build and 
 2. [ Securing SSH ](#SSH)
 3. [ NGINX Web Server](#NGINX)
 4. [ Own Cloud](#owncloud)
+
 <a name="desc"></a>
 # 1. Writing the ISO & Installing onto the machine
 I retreieved the ISO image from the official Fedora website *https://getfedora.org/en/server/download/* and used a installation tool called **Rufus**.
@@ -42,6 +43,7 @@ To allow SSH to be accessible from anywhere in the world we will need to port fo
 ip route | grep 'default'
 ```
 The IP returned will be the defualt gateway, and can be accessible from a browser. Simply type the default gateway into your browser and you will be redirected to the your routers page. NoIP has a great guide to portforward **https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/** 
+
 <a name="NGINX"></a>
 # 3. NGINX Web Server
 After hours of deciding between NGINX & Apache, I decided on NGINX because of how powerfully fast it is when using static configurations. For now my plan is to host my portfolio on this server so NGINX should suit be fine for my use case, but if you are using a dynamic configuration with mutiple web pages Apache may be better for you.
@@ -55,8 +57,7 @@ sudo systemctl start nginx
 systemctl status nginx 
 sudo systemctl enable nginx
 ```
-##### Test Your NGINX Server
-```bash
 
+##### Test Your NGINX Server
 <a name="owncloud"></a>
 # 4. Own Cloud Personal Cloud Server 
