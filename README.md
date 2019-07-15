@@ -58,7 +58,12 @@ sudo systemctl start nginx
 systemctl status nginx
 sudo systemctl enable nginx
 ```
-
+```bash
+#Add services to firewalld
+sudo firewall-cmd --zone=Fedora Server --add-service=http --permanent
+#Add HTTPS
+sudo firewall-cmd --zone=Fedora Server --add-service=https --permanent
+```
 ##### Test Your NGINX Server
 
 <a name="dynu"></a>
@@ -66,8 +71,10 @@ sudo systemctl enable nginx
 I downloaded the rpm file from **https://www.dynu.com/Downloads/IP-Update-Client-For-Linux** and I wil now be transfering this rpm to the server via sftp.
 
 ```bash
-
-
+#Install RPM
+sudo rpm -i dynuiuc-2.6.2-2.el7.x86_64.rpm
+#Edit configuration file using username and password
+sudo nano /etc/dynuiuc/dynuiuc.conf
 ```
 <a name="owncloud"></a>
 # 6. Own Cloud Personal Cloud Server
