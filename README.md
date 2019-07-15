@@ -67,7 +67,7 @@ sudo firewall-cmd --zone=Fedora Server --add-service=https --permanent
 ##### Test Your NGINX Server
 
 <a name="dynu"></a>
-# 5. DYNU Dynamic Update Client
+# 4. DYNU Dynamic Update Client
 I downloaded the rpm file from **https://www.dynu.com/Downloads/IP-Update-Client-For-Linux** and I wil now be transfering this rpm to the server via sftp.
 
 ```bash
@@ -77,7 +77,7 @@ sudo rpm -i dynuiuc-2.6.2-2.el7.x86_64.rpm
 sudo nano /etc/dynuiuc/dynuiuc.conf
 ```
 <a name="owncloud"></a>
-# 6. Own Cloud Personal Cloud Server
+# 5. Own Cloud Personal Cloud Server
 
 
 
