@@ -1,6 +1,6 @@
 # Multi-Use Home Server Project
 The purpose of this repository is to document and share my experience with building a multi-purpose Linux server.
-My plan for this server is to use it as a web server and a cloud file server.
+My plan for this server is to use it as a web server and a cloud file server for my own personal needs.
 I will be using **Fedora 30 Server** edition on a scrapped computer I build and deploying it in my household.
 
 # Table of Contents
@@ -58,22 +58,23 @@ sudo systemctl start nginx
 systemctl status nginx
 sudo systemctl enable nginx
 ```
+
 ```bash
-#Add services to firewalld
+#Add HTTP & HTTPS to Server
 sudo firewall-cmd --zone=Fedora Server --add-service=http --permanent
 #Add HTTPS
 sudo firewall-cmd --zone=Fedora Server --add-service=https --permanent
 ```
+
 ##### Test Your NGINX Server
 
 <a name="dynu"></a>
 # 4. DYNU Dynamic Update Client
-I downloaded the rpm file from **https://www.dynu.com/Downloads/IP-Update-Client-For-Linux** and I wil now be transfering this rpm to the server via sftp.
-
+I downloaded the rpm file from *https://www.dynu.com/Downloads/IP-Update-Client-For-Linux* and transfered the rpm file to the server via sftp. Below are the commands for instaling the RPM.
 ```bash
 #Install RPM
 sudo rpm -i dynuiuc-2.6.2-2.el7.x86_64.rpm
-#Edit configuration file using username and password
+#Edit configuration file using username and password from DYNU's website
 sudo nano /etc/dynuiuc/dynuiuc.conf
 ```
 <a name="owncloud"></a>
