@@ -68,12 +68,12 @@ sudo firewall-cmd --zone=Fedora Server --add-service=http --permanent
 sudo firewall-cmd --zone=Fedora Server --add-service=https --permanent
 ```
 
-##### Test Your NGINX Server
+### Test Your NGINX Server
 Open up a browser on a host and hit the ip address of your server followed by a colon and the port which it is running on. By default this is port 80 (ex. 192.168.0.92:80). If you are presented with the following page or something similar to this you made successfully deployed NGINX.  
 ![alt text](https://github.com/collinkleest/HomeServer/blob/master/images/Capture2.JPG)
 I now copy my portfolio files over to my system using a windows tool called WinSCP, a easy to use tool for transfering files over SFTP. A download for WinSCP can be found here *https://winscp.net/eng/index.php*.
 
-##### Configuring SSL (https)
+### Configuring SSL (https)
 Today, almost all websites have an SSL cetificate, HTTPS allows for encyrpted data transfer between the user and the server. Although my website won't use HTTPS at first, it may come in handy in the future.
 
 
