@@ -90,8 +90,13 @@ I downloaded the rpm file from *https://www.dynu.com/Downloads/IP-Update-Client-
 ```bash
 #Install RPM
 sudo rpm -i dynuiuc-2.6.2-2.el7.x86_64.rpm
+#Enable on startup 
+sudo systemctl enable dynuiuc.service
 #Edit configuration file using username and password from DYNU's website
 sudo nano /etc/dynuiuc/dynuiuc.conf
+#Start DYNU & ensure it's running
+sudo systemctl start dynuiuc.service
+sudo systemctl status dynuiuc.service
 ```
 <a name="owncloud"></a>
 # 5. Own Cloud Personal Cloud Server
