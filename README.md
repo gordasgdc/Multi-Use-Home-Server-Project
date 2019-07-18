@@ -1,7 +1,7 @@
 # Multi-Use Home Server Project
-The purpose of this repository is to document and share my experience with building a multi-purpose Linux server.
-My plan for this server is to use it as a web server and a cloud file server for my own personal needs.
-I will be using **Fedora 30 Server** edition on a scrapped computer I build and deploying it in my household.
+The purpose of this repository is to document and share my experience with building a multi-purpose Linux server. I will cover many topics of building the server, including building the server from scratch, implementing security measures, configuring a web server, configuring a dynamic IP client, and building a personalized cloud. 
+My plan for this server is to use it as a web server and a cloud file server for my own personal needs. 
+I will be using **Fedora 30 Server** edition on a scrapped computer I build and deploying it in my household. This isn't a tutorial but documentation to enhance my learning experience throughout the process of building the server. 
 
 # Table of Contents
 1. [ Writing the ISO & Installing onto the machine ](#desc)
@@ -18,11 +18,13 @@ Rufus is an easy to use ISO image writer, found at *https://rufus.ie/*. After wr
 <a name="SSH"></a>
 # 2. Securing SSH
 To access the server remotely and from other computers localy we will need a SSH (Secure Shell) client.
-Fedora 30 Server eddition already comes with a SSH client instlled on the computer itself but this is on a known port, port 22. This leads me to my first security measure on this server.
-I will be using a less known port (ex. **56358**) to secure the SSH service. To do this you will need to navigate to the where the SSH config file is located and edit the configuration file with your favorite text editor.
-```bashPost Installation
+Fedora 30 Server edition already comes with a SSH client instlled on the computer itself but unfortunetly this client runs on a well known port, port 22. This leads me to my first security measure on this server.
+I will be using a less known port (ex. **56358**) to secure the SSH service. To do this you will need to navigate to the where the SSH config file is located and edit the configuration file with a text editor, I will use nano but there are other good options like vi, or vim. 
+```bash
+#Directign nano to the ssh configuration file
 sudo nano /etc/ssh/ssh_config
 ```
+Here I comment out the port and use a less known port. 
 ![alt text](https://github.com/collinkleest/HomeServer/blob/master/images/Capture.JPG)
 Now we must check if we have a firewall running. Fedora comes with firewalld by default so we will run some bash to make sure it's running and then set a rule to allow traffic to hit our SSH service.
 ```bash
@@ -43,7 +45,7 @@ To allow SSH to be accessible from anywhere in the world we will need to port fo
 #issue this command to find the IP  of the default gateway
 ip route | grep 'default'
 ```
-The IP returned will be the defualt gateway, and can be accessible from a browser. Simply type the default gateway into your browser and you will be redirected to the your routers page. NoIP has a great guide to portforward **https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/**
+The IP returned will be the defualt gateway, and can be accessible from a browser. Simply type the default gateway into your browser and you will be redirected to the your routers page. NoIP has a great guide to portforward: *https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/*
 
 <a name="NGINX"></a>
 # 3. NGINX Web Server
