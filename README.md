@@ -70,7 +70,7 @@ sudo firewall-cmd --zone=Fedora Server --add-service=https --permanent
 
 ##### Test Your NGINX Server
 Open up a browser on a host and hit the ip address of your server followed by a colon and the port which it is running on. By default this is port 80 (ex. 192.168.0.92:80). If you are presented with the following page or something similar to this you made successfully deployed NGINX.  
-
+![alt text](https://github.com/collinkleest/HomeServer/blob/master/images/Capture2.JPG)
 
 <a name="dynu"></a>
 # 4. DYNU Dynamic Update Client
