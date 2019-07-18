@@ -75,8 +75,14 @@ I now copy my portfolio files over to my system using a windows tool called WinS
 
 ### Configuring SSL (https)
 Today, almost all websites have an SSL cetificate, HTTPS allows for encyrpted data transfer between the user and the server. Although my website won't use HTTPS at first, it may come in handy in the future.
+I will use a service called **Let's Encrypt**, this is a free service for SSL certificiates.
 
-
+```bash
+#Install certbot for nginx
+sudo dnf -y install certbot certbot-nginx
+#Automatically allow cetbot to edit your nginx confitguration file
+sudo certbot --nginx
+```
 
 <a name="dynu"></a>
 # 4. DYNU Dynamic Update Client
@@ -89,6 +95,3 @@ sudo nano /etc/dynuiuc/dynuiuc.conf
 ```
 <a name="owncloud"></a>
 # 5. Own Cloud Personal Cloud Server
-
-
-
