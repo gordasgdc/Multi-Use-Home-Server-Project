@@ -21,8 +21,8 @@ To access the server remotely and from other computers localy we will need a SSH
 Fedora 30 Server edition already comes with a SSH client instlled on the computer itself but unfortunetly this client runs on a well known port, port 22. This leads me to my first security measure on this server.
 I will be using a less known port (ex. **56358**) to secure the SSH service. To do this you will need to navigate to the where the SSH config file is located and edit the configuration file with a text editor, I will use nano but there are other good options like vi, or vim. 
 ```bash
-#Directign nano to the ssh configuration file
-sudo nano /etc/ssh/ssh_config
+#Using nano to the ssh configuration file
+sudo nano /etc/ssh/sshd_config
 ```
 Here I comment out the port and use a less known port. 
 ![alt text](https://github.com/collinkleest/HomeServer/blob/master/images/Capture.JPG)
