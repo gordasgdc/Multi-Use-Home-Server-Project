@@ -7,8 +7,9 @@ I will be using **Fedora 30 Server** edition on a scrapped computer I build and 
 1. [ Writing the ISO & Installing onto the machine ](#desc)
 2. [ Securing SSH ](#SSH)
 3. [ NGINX Web Server](#NGINX)
-4. [ Dynu Dynamic IP Client](#dynu)
-5. [ OwnCloud](#owncloud)
+4. [ NGINX Web Server](#NGINX)
+5. [ Dynu Dynamic IP Client](#dynu)
+6. [ OwnCloud](#owncloud)
 
 <a name="desc"></a>
 # 1. Writing the ISO & Installing onto the machine
@@ -77,7 +78,8 @@ Open up a browser on a host and hit the ip address of your server followed by a 
 ![alt text](https://github.com/collinkleest/HomeServer/blob/master/images/Capture2.JPG)
 I now copy my portfolio files over to my system using a windows tool called WinSCP, a easy to use tool for transfering files over SFTP. A download for WinSCP can be found here *https://winscp.net/eng/index.php*.
 
-### Configuring SSL (https)
+<a name="certbot"></a>
+# 4. Configuring SSL (https) with Let's Encrypt/Certbot
 Today, almost all websites have an SSL cetificate, HTTPS allows for encyrpted data transfer between the user and the server. Although my website won't use HTTPS at first, it may come in handy in the future.
 I will use a service called **Let's Encrypt**, this is a free service for SSL certificiates.
 
@@ -93,9 +95,9 @@ sudo certbot --nginx
 #Set up automatic renewel of the SSL certificate
 echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew" | sudo tee -a /etc/crontab > /dev/null
 ```
-
+Certbot makes it extrely easy to setup https for your web page. Cerbot automatically configures your nginx configuration file if you choose that option. Below is an image of the nginx configuration file. 
 <a name="dynu"></a>
-# 4. DYNU Dynamic Update Client
+# 5. DYNU Dynamic Update Client
 I downloaded the rpm file from *https://www.dynu.com/Downloads/IP-Update-Client-For-Linux* and transfered the rpm file to the server via sftp. Below are the commands for instaling the RPM.
 ```bash
 #Install RPM
@@ -111,7 +113,7 @@ sudo systemctl start dynuiuc.service
 sudo systemctl status dynuiuc.service
 ```
 <a name="owncloud"></a>
-# 5. Own Cloud Personal Cloud Server
+# 6. Own Cloud Personal Cloud Server
 For my file storage and personal cloud needs I will be using OwnCloud community edition. 
 ```bash 
 #First we must trust the repository
@@ -120,3 +122,4 @@ sudo rpm --import https://download.owncloud.org/download/repositories/production
 sudo dnf config-manager --add-repo http://download.owncloud.org/download/repositories/production/Fedora_30/ce:stable.repo
 sudo dnf clean all
 sudo dnf install owncloud-files
+```
