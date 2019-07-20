@@ -26,7 +26,11 @@ sudo nano /etc/ssh/sshd_config
 ```
 Here I comment out the port and use a less known port. 
 ![alt text](https://github.com/collinkleest/HomeServer/blob/master/images/Capture.JPG)
+
+
 Now we must check if we have a firewall running. Fedora comes with firewalld by default so we will run some bash to make sure it's running and then set a rule to allow traffic to hit our SSH service.
+
+
 ```bash
 sudo systemctl start firewalld
 sudo systemctl status firewalld
@@ -82,6 +86,12 @@ I will use a service called **Let's Encrypt**, this is a free service for SSL ce
 sudo dnf -y install certbot certbot-nginx
 #Automatically allow cetbot to edit your nginx confitguration file
 sudo certbot --nginx
+#NOTE: cetificate files are now saved in the following locations
+#CERT: /etc/letsencrypt/live/collinkleest.dynu.net/fullchain.pem
+#KEY: /etc/letsencrypt/live/collinkleest.dynu.net/privkey.pem
+#CREDENTIALS: /etc/letsencrypt
+#Set up automatic renewel of the SSL certificate
+echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew" | sudo tee -a /etc/crontab > /dev/null
 ```
 
 <a name="dynu"></a>
@@ -90,6 +100,8 @@ I downloaded the rpm file from *https://www.dynu.com/Downloads/IP-Update-Client-
 ```bash
 #Install RPM
 sudo rpm -i dynuiuc-2.6.2-2.el7.x86_64.rpm
+#Or instead of SFTPing the file to the machine use the following commnad
+rpm -ivh https://www.dynu.com/support/downloadfile/30
 #Enable on startup 
 sudo systemctl enable dynuiuc.service
 #Edit configuration file using username and password from DYNU's website
@@ -100,4 +112,11 @@ sudo systemctl status dynuiuc.service
 ```
 <a name="owncloud"></a>
 # 5. Own Cloud Personal Cloud Server
-
+For my file storage and personal cloud needs I will be using OwnCloud community edition. 
+```bash 
+#First we must trust the repository
+sudo rpm --import https://download.owncloud.org/download/repositories/production/Fedora_30/repodata/repomd.xml.key
+#Add and install repository
+sudo dnf config-manager --add-repo http://download.owncloud.org/download/repositories/production/Fedora_30/ce:stable.repo
+sudo dnf clean all
+sudo dnf install owncloud-files
