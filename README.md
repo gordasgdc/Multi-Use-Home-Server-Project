@@ -123,3 +123,37 @@ sudo dnf config-manager --add-repo http://download.owncloud.org/download/reposit
 sudo dnf clean all
 sudo dnf install owncloud-files
 ```
+### Setting Up LEMP (Linux, NGINX, MySQL, PHP)  Server
+Since I already have NGINX installed we are going to go right to MySQL and then install PHP. 
+MySQL Installation: 
+```bash
+#Download the rpm
+wget https://dev.mysql.com/get/mysql80-community-release-fc30-1.noarch.rpm
+#Install the rpm
+sudo rpm -Uvh 
+```
+```bash 
+sudo dnf config-manager --disable mysql57-community
+sudo dnf config-manager --enable mysql80-community
+sudo dnf config-manager --enable mysql80-community-source
+#Install
+sudo dnf install mysql-community-server
+```
+```bash
+#Start MySQL
+sudo systemctl start mysqld.service
+#Check if it is running
+systemctl status mysqld.service
+#Get the temporary password
+sudo cat /var/log/mysqld.log | grep 'temporary password'
+#Login and change the password
+mysql -uroot -p
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'NewPassword';
+```
+### Installing PHP
+```bash
+#Intalls to /usr/bin/php
+sudo dnf install php-cli
+sudo dnf install phpunit composer
+sudo dnf install php-mysqli
+```
