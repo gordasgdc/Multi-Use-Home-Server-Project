@@ -157,5 +157,11 @@ mysql_secure_installation
 ```
 ### Installing PHP
 ```bash
-sudo dnf -y install php php-fpm php-mysql
+# Install php and additional modules
+sudo dnf -y install php php-fpm php-common php-mysqlnd
+# Start and enable php-fpm 
+sudo systemctl start php-fpm.service
+sudo systemctl enable php-fpm.service
 ```
+Some notes on PHP, the php.ini configuration is fount at /etc/php.ini. 
+
