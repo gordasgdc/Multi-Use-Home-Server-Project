@@ -7,7 +7,8 @@ I will be using **Fedora 30 Server** edition on a scrapped computer I build and 
 1. [ Writing the ISO & Installing onto the machine ](#desc)
 2. [ Securing SSH ](#SSH)
 3. [ NGINX Web Server](#NGINX)
-4. [ NGINX Web Server](#NGINX)
+4. [ Configuring SSL (https) with Let's Encrypt/Certbot
+](#certbot)
 5. [ Dynu Dynamic IP Client](#dynu)
 6. [ OwnCloud](#owncloud)
 
@@ -150,10 +151,11 @@ sudo cat /var/log/mysqld.log | grep 'temporary password'
 mysql -uroot -p
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'NewPassword';
 ```
+It's a good idea to change MySQL default settings that allow some security vulnerabilities. The command below will secure your MySQL isntallation. 
+```bash 
+mysql_secure_installation
+```
 ### Installing PHP
 ```bash
-#Intalls to /usr/bin/php
-sudo dnf install php-cli
-sudo dnf install phpunit composer
-sudo dnf install php-mysqli
+sudo dnf -y install php php-fpm php-mysql
 ```
