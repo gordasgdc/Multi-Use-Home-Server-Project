@@ -9,8 +9,9 @@ I will be using **Fedora 30 Server** edition on a scrapped computer I build and 
 3. [ NGINX Web Server](#NGINX)
 4. [ Configuring SSL (https) with Let's Encrypt/Certbot
 ](#certbot)
-5. [ Dynu Dynamic IP Client](#dynu)
-6. [ OwnCloud](#owncloud)
+5. [ LEMP Stack](#LEMP)
+6. [ Dynu Dynamic IP Client](#dynu)
+7. [ OwnCloud](#owncloud)
 
 <a name="desc"></a>
 # 1. Writing the ISO & Installing onto the machine
@@ -57,6 +58,15 @@ The IP returned will be the defualt gateway, and can be accessible from a browse
 # 3. NGINX Web Server
 After hours of deciding between NGINX & Apache, I decided on NGINX because of how powerfully fast it is when using static configurations. For now my plan is to host my portfolio on this server so NGINX should suit be fine for my use case, but if you are using a dynamic configuration with mutiple web pages Apache may be better for you.
 I will now go through my installation and configuration of NGINX. This will be different across distrobutions of linux, as I said before I am using Fedora so this installation will work for most RedHat distribtuions.
+
+```bash
+# Confirm that Apache is stoped and disabled on startup
+systemctl status httpd
+#If it is started and enabled on startup perform the following commands
+sudo systemctl stop httpd
+sudo systemctl disable httpd
+```
+
 ```bash
 #install nginx through dnf
 sudo dnf -y install nginx
@@ -113,26 +123,19 @@ sudo nano /etc/dynuiuc/dynuiuc.conf
 sudo systemctl start dynuiuc.service
 sudo systemctl status dynuiuc.service
 ```
-<a name="owncloud"></a>
-# 6. Own Cloud Personal Cloud Server
-For my file storage and personal cloud needs I will be using OwnCloud community edition. 
-```bash 
-#First we must trust the repository
-sudo rpm --import https://download.owncloud.org/download/repositories/production/Fedora_30/repodata/repomd.xml.key
-#Add and install repository
-sudo dnf config-manager --add-repo http://download.owncloud.org/download/repositories/production/Fedora_30/ce:stable.repo
-sudo dnf clean all
-sudo dnf install owncloud-files
-```
-### Setting Up LEMP (Linux, NGINX, MySQL, PHP)  Server
-Since I already have NGINX installed we are going to go right to MySQL and then install PHP. 
-MySQL Installation: 
+
+<a name="LEMP"></a>
+# 6. Setting Up LEMP (Linux, NGINX, MySQL, PHP)  Server
+Since I already have NGINX, and Fedora installed we are going to go right to MySQL and then install PHP. 
+### Installing MySQL 
+
 ```bash
 #Download the rpm
 wget https://dev.mysql.com/get/mysql80-community-release-fc30-1.noarch.rpm
 #Install the rpm
 sudo rpm -Uvh 
 ```
+
 ```bash 
 sudo dnf config-manager --disable mysql57-community
 sudo dnf config-manager --enable mysql80-community
@@ -140,6 +143,7 @@ sudo dnf config-manager --enable mysql80-community-source
 #Install
 sudo dnf install mysql-community-server
 ```
+
 ```bash
 #Start MySQL
 sudo systemctl start mysqld.service
@@ -151,10 +155,12 @@ sudo cat /var/log/mysqld.log | grep 'temporary password'
 mysql -uroot -p
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'NewPassword';
 ```
+
 It's a good idea to change MySQL default settings that allow some security vulnerabilities. The command below will secure your MySQL isntallation. 
 ```bash 
 mysql_secure_installation
 ```
+
 ### Installing PHP
 ```bash
 # Install php and additional modules
@@ -163,5 +169,31 @@ sudo dnf -y install php php-fpm php-common php-mysqlnd
 sudo systemctl start php-fpm.service
 sudo systemctl enable php-fpm.service
 ```
-Some notes on PHP, the php.ini configuration is fount at /etc/php.ini. 
+Some notes on PHP, the php.ini configuration is fount at /etc/php.ini. You can confirm your installation by using the following command, and directing your browser to http://yourip/info.php
 
+```bash
+echo "<?php phpinfo(); ?>" > /usr/share/nginx/html/info.php
+```
+
+<a name="owncloud"></a>
+# 7. Own Cloud Personal Cloud Server
+For my file storage and personal cloud needs I will be using OwnCloud community edition. 
+```bash 
+#First we must trust the repository
+sudo rpm --import https://download.owncloud.org/download/repositories/production/Fedora_30/repodata/repomd.xml.key
+#Add and install repository
+sudo dnf config-manager --add-repo http://download.owncloud.org/download/repositories/production/Fedora_30/ce:stable.repo
+sudo dnf clean all
+sudo dnf install owncloud-files
+```
+### SQL
+```bash
+#login to mysql database
+BASH
+mysql -u root -p
+SQL 
+CREATE DATABASE owncloud;
+CREATE USER 'ownclouduser'@'localhost' IDENTIFIED BY 'pass';
+GRANT ALL PRIVILEGES ON database.table TO 'user'@'localhost';
+FLUSH PRIVILEGES;
+```
